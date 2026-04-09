@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AcadMetrics — Student Performance Analysis</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ========================= LOADER ========================= -->
+  <div class="loader-overlay" id="loaderOverlay">
+    <div class="loader-content">
+      <div class="loader-ring"></div>
+      <span class="loader-text">Processing Data...</span>
+    </div>
+  </div>
+
+  <!-- ========================= HEADER ========================= -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-icon">Σ</div>
+        <div class="brand-text">
+          <span class="brand-name">AcadMetrics</span>
+          <span class="brand-sub">Performance Analysis System</span>
+        </div>
+      </div>
+      <nav class="header-nav">
+        <button class="nav-btn active" data-tab="input" onclick="switchTab('input')">
+          <span class="nav-icon">⊞</span> Data Input
+        </button>
+        <button class="nav-btn" data-tab="dashboard" onclick="switchTab('dashboard')">
+          <span class="nav-icon">◈</span> Dashboard
+        </button>
+        <button class="nav-btn" data-tab="compare" onclick="switchTab('compare')">
+          <span class="nav-icon">⊕</span> Compare
+        </button>
+      </nav>
+      <div class="header-actions">
+        <!-- Theme Toggle -->
+        <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+          <span class="theme-icon" id="themeIcon">☀</span>
+        </button>
+        <!-- Help Button -->
+        <button class="help-btn" onclick="toggleHelp()" title="Help & Guide">
+          <span>?</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================= HELP PANEL ========================= -->
+  <div class="help-overlay" id="helpOverlay" onclick="toggleHelp()"></div>
+  <aside class="help-panel" id="helpPanel">
+    <div class="help-header">
+      <h3>Quick Guide</h3>
+      <button onclick="toggleHelp()" class="help-close">✕</button>
+    </div>
+    <div class="help-body">
+      <div class="help-step">
+        <div class="help-step-num">01</div>
+        <div>
+          <strong>Select Degree & Semester</strong>
+          <p>Choose your program and semester. Subjects update automatically.</p>
+        </div>
+      </div>
+      <div class="help-step">
+        <div class="help-step-num">02</div>
+        <div>
+          <strong>Set Number of Subjects</strong>
+          <p>Enter how many subjects you want to add (max 10). Fields will appear below.</p>
+        </div>
+      </div>
+      <div class="help-step">
+        <div class="help-step-num">03</div>
+        <div>
+          <strong>Enter Marks</strong>
+          <p>Input marks (0–100) for each subject. CGPA is calculated using a 10-point grade system.</p>
+        </div>
+      </div>
+      <div class="help-step">
+        <div class="help-step-num">04</div>
+        <div>
+          <strong>Add Multiple Students</strong>
+          <p>Use "Add Student" to compare performance across multiple students.</p>
+        </div>
+      </div>
+      <div class="help-step">
+        <div class="help-step-num">05</div>
+        <div>
+          <strong>View Dashboard</strong>
+          <p>Click "Generate Dashboard" to see charts and insights.</p>
+        </div>
+      </div>
+      <div class="help-grade-table">
+        <h4>Grading Scale</h4>
+        <table>
+          <thead><tr><th>Marks</th><th>Grade</th><th>Points</th></tr></thead>
+          <tbody>
+            <tr><td>90–100</td><td>O</td><td>10</td></tr>
+            <tr><td>80–89</td><td>A+</td><td>9</td></tr>
+            <tr><td>70–79</td><td>A</td><td>8</td></tr>
+            <tr><td>60–69</td><td>B+</td><td>7</td></tr>
+            <tr><td>50–59</td><td>B</td><td>6</td></tr>
+            <tr><td>40–49</td><td>C</td><td>5</td></tr>
+            <tr><td>Below 40</td><td>F</td><td>0</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ========================= MAIN ========================= -->
+  <main class="main-content">
+
+    <!-- ===== TAB: INPUT ===== -->
+    <section class="tab-section" id="tab-input">
+
+      <!-- Student Tabs Bar -->
+      <div class="student-tabs-bar">
+        <div class="student-tabs-scroll" id="studentTabsScroll">
+          <!-- Tabs injected by JS -->
+        </div>
+        <button class="add-student-btn" onclick="addStudent()" title="Add New Student">
+          <span>+</span> Add Student
+        </button>
+      </div>
+
+      <!-- Input Form Card -->
+      <div class="form-grid">
+
+        <!-- Left Column -->
+        <div class="form-left">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Student Profile</h2>
+              <span class="card-badge" id="activeStudentBadge">Student 1</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="studentName">
+                Student Name
+                <span class="required">*</span>
+              </label>
+              <input
+                type="text"
+                id="studentName"
+                class="form-input"
+                placeholder="Enter student name"
+                oninput="updateCurrentStudent()"
+              />
+              <span class="form-error" id="nameError"></span>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="degreeSelect">
+                  Degree Program <span class="required">*</span>
+                </label>
+                <div class="select-wrapper">
+                  <select id="degreeSelect" class="form-select" onchange="onDegreeChange()">
+                    <option value="">— Select Degree —</option>
+                    <option value="btech_cse">B.Tech CSE</option>
+                    <option value="btech_ece">B.Tech ECE</option>
+                    <option value="btech_me">B.Tech ME</option>
+                    <option value="btech_civil">B.Tech Civil</option>
+                    <option value="bca">BCA</option>
+                    <option value="bsc_cs">B.Sc. Computer Science</option>
+                    <option value="bba">BBA</option>
+                    <option value="mba">MBA</option>
+                    <option value="mca">MCA</option>
+                  </select>
+                </div>
+                <span class="form-error" id="degreeError"></span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="semesterSelect">
+                  Semester <span class="required">*</span>
+                </label>
+                <div class="select-wrapper">
+                  <select id="semesterSelect" class="form-select" onchange="onSemesterChange()" disabled>
+                    <option value="">— Select —</option>
+                  </select>
+                </div>
+                <span class="form-error" id="semError"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="numSubjects">
+                Number of Subjects <span class="required">*</span>
+                <span class="tooltip-trigger" data-tip="Enter a number between 1 and 10">ⓘ</span>
+              </label>
+              <div class="num-subjects-row">
+                <input
+                  type="number"
+                  id="numSubjects"
+                  class="form-input"
+                  placeholder="e.g. 6"
+                  min="1" max="10"
+                  oninput="onNumSubjectsChange()"
+                />
+                <button class="btn-secondary" onclick="generateSubjectFields()">Generate Fields</button>
+              </div>
+              <span class="form-error" id="numSubjectsError"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Subject Fields -->
+        <div class="form-right">
+          <div class="card" id="subjectsCard">
+            <div class="card-header">
+              <h2 class="card-title">Subjects & Marks</h2>
+              <span class="card-badge" id="subjectCountBadge">0 subjects</span>
+            </div>
+
+            <div id="subjectFields" class="subject-fields">
+              <div class="subjects-placeholder">
+                <div class="placeholder-icon">◫</div>
+                <p>Select degree, semester, and number of subjects above to generate input fields.</p>
+              </div>
+            </div>
+
+            <!-- CGPA Preview -->
+            <div class="cgpa-preview" id="cgpaPreview" style="display:none">
+              <div class="cgpa-label">Calculated CGPA</div>
+              <div class="cgpa-value" id="cgpaValue">—</div>
+              <div class="cgpa-grade" id="cgpaGrade"></div>
+              <div class="cgpa-bar-wrap">
+                <div class="cgpa-bar" id="cgpaBar"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="action-row">
+            <button class="btn-outline" onclick="clearCurrentStudent()">
+              <span>↺</span> Clear
+            </button>
+            <button class="btn-outline" onclick="saveToLocalStorage()">
+              <span>⬇</span> Save Draft
+            </button>
+            <button class="btn-primary" onclick="generateDashboard()">
+              <span>◈</span> Generate Dashboard
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TAB: DASHBOARD ===== -->
+    <section class="tab-section hidden" id="tab-dashboard">
+      <div class="dashboard-header">
+        <div>
+          <h2 class="page-title">Performance Dashboard</h2>
+          <p class="page-sub" id="dashboardSubtitle">Overview of academic performance metrics</p>
+        </div>
+        <button class="btn-outline" onclick="switchTab('input')">← Back to Input</button>
+      </div>
+
+      <!-- Summary Cards -->
+      <div class="summary-grid" id="summaryGrid">
+        <!-- Injected by JS -->
+      </div>
+
+      <!-- Charts Grid -->
+      <div class="charts-grid">
+        <div class="card chart-card span-2">
+          <div class="card-header">
+            <h3 class="card-title">Subject-wise Performance</h3>
+            <div class="chart-legend" id="subjectChartLegend"></div>
+          </div>
+          <div class="chart-container">
+            <canvas id="subjectBarChart"></canvas>
+          </div>
+        </div>
+
+        <div class="card chart-card">
+          <div class="card-header">
+            <h3 class="card-title">Grade Distribution</h3>
+          </div>
+          <div class="chart-container chart-container--sm">
+            <canvas id="gradeDonutChart"></canvas>
+          </div>
+        </div>
+
+        <div class="card chart-card">
+          <div class="card-header">
+            <h3 class="card-title">Performance Radar</h3>
+          </div>
+          <div class="chart-container chart-container--sm">
+            <canvas id="radarChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Insights Section -->
+      <div class="card insights-card" id="insightsCard">
+        <div class="card-header">
+          <h3 class="card-title">Performance Insights</h3>
+          <span class="card-badge">AI Summary</span>
+        </div>
+        <div class="insights-grid" id="insightsGrid">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TAB: COMPARE ===== -->
+    <section class="tab-section hidden" id="tab-compare">
+      <div class="dashboard-header">
+        <div>
+          <h2 class="page-title">Multi-Student Comparison</h2>
+          <p class="page-sub">Side-by-side academic performance review</p>
+        </div>
+        <button class="btn-outline" onclick="switchTab('input')">← Back to Input</button>
+      </div>
+
+      <div class="compare-note" id="compareNote" style="display:none">
+        <span class="note-icon">⚠</span>
+        Add at least 2 students with data to enable comparison.
+      </div>
+
+      <!-- Comparison Table -->
+      <div class="card" id="compareTableCard">
+        <div class="card-header">
+          <h3 class="card-title">CGPA Comparison Table</h3>
+        </div>
+        <div class="table-wrap">
+          <table class="compare-table" id="compareTable">
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Degree</th>
+                <th>Semester</th>
+                <th>CGPA</th>
+                <th>Grade</th>
+                <th>Status</th>
+                <th>Best Subject</th>
+              </tr>
+            </thead>
+            <tbody id="compareTableBody">
+              <!-- Injected by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Comparison Charts -->
+      <div class="charts-grid">
+        <div class="card chart-card span-2">
+          <div class="card-header">
+            <h3 class="card-title">CGPA Comparison</h3>
+          </div>
+          <div class="chart-container">
+            <canvas id="cgpaCompareChart"></canvas>
+          </div>
+        </div>
+
+        <div class="card chart-card span-2">
+          <div class="card-header">
+            <h3 class="card-title">Subject Performance Overlay</h3>
+          </div>
+          <div class="chart-container">
+            <canvas id="subjectOverlayChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================= FOOTER ========================= -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>AcadMetrics · Capstone Project — Comparative Students Performance Analysis</span>
+      <span class="footer-divider">|</span>
+      <span>Data stored locally · No server required</span>
+    </div>
+  </footer>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+</html>
