@@ -38,8 +38,8 @@
   --radius-lg:  18px;
   --radius-xl:  24px;
 
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-body:    'DM Sans', system-ui, sans-serif;
+  --font-display: 'Poppins', system-ui, sans-serif;
+  --font-body:    'Inter', system-ui, sans-serif;
   --font-mono:    'JetBrains Mono', monospace;
 
   --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);

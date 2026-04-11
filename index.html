@@ -8,7 +8,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -171,15 +171,21 @@
                 <div class="select-wrapper">
                   <select id="degreeSelect" class="form-select" onchange="onDegreeChange()">
                     <option value="">— Select Degree —</option>
-                    <option value="btech_cse">B.Tech CSE</option>
-                    <option value="btech_ece">B.Tech ECE</option>
-                    <option value="btech_me">B.Tech ME</option>
-                    <option value="btech_civil">B.Tech Civil</option>
-                    <option value="bca">BCA</option>
-                    <option value="bsc_cs">B.Sc. Computer Science</option>
-                    <option value="bba">BBA</option>
-                    <option value="mba">MBA</option>
-                    <option value="mca">MCA</option>
+                    <optgroup label="IIT Patna B.S Programmes">
+                      <option value="bs_aics">B.S AI &amp; Cyber Security (AICS)</option>
+                      <option value="bs_csda">B.S CS &amp; Data Analytics (CSDA)</option>
+                    </optgroup>
+                    <optgroup label="Other Programmes">
+                      <option value="btech_cse">B.Tech CSE</option>
+                      <option value="btech_ece">B.Tech ECE</option>
+                      <option value="btech_me">B.Tech ME</option>
+                      <option value="btech_civil">B.Tech Civil</option>
+                      <option value="bca">BCA</option>
+                      <option value="bsc_cs">B.Sc. Computer Science</option>
+                      <option value="bba">BBA</option>
+                      <option value="mba">MBA</option>
+                      <option value="mca">MCA</option>
+                    </optgroup>
                   </select>
                 </div>
                 <span class="form-error" id="degreeError"></span>

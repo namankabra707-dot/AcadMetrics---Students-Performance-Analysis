@@ -11,6 +11,10 @@
  * Degree → Semester count mapping
  */
 const DEGREE_SEMESTERS = {
+  // ── IIT Patna B.S Programmes (added) ──────────────────────
+  bs_aics:    8,   // B.S Artificial Intelligence & Cyber Security
+  bs_csda:    8,   // B.S Computer Science & Data Analytics
+  // ── Existing degrees ──────────────────────────────────────
   btech_cse:  8,
   btech_ece:  8,
   btech_me:   8,
@@ -26,6 +30,10 @@ const DEGREE_SEMESTERS = {
  * Degree labels for display
  */
 const DEGREE_LABELS = {
+  // ── IIT Patna B.S Programmes (added) ──────────────────────
+  bs_aics:    "B.S AICS",
+  bs_csda:    "B.S CSDA",
+  // ── Existing degrees ──────────────────────────────────────
   btech_cse:  "B.Tech CSE",
   btech_ece:  "B.Tech ECE",
   btech_me:   "B.Tech ME",
@@ -41,6 +49,235 @@ const DEGREE_LABELS = {
  * Subject pool: degree → semester → [subjects]
  */
 const SUBJECT_POOL = {
+
+  // ════════════════════════════════════════════════════════════
+  // B.S Artificial Intelligence and Cyber Security (AICS)
+  // Source: AICS PDF — IIT Patna (4-Year B.S Programme)
+  // ════════════════════════════════════════════════════════════
+  bs_aics: {
+    // Semester I — Core (19 credits)
+    1: [
+      "Mathematics - I",
+      "Foundations of Computer Science",
+      "Foundations of Data Analytics",
+      "Foundations of English for Professionals",
+    ],
+    // Semester II — Core (20 credits)
+    2: [
+      "Mathematics - II",
+      "Programming and Data Structures with Python",
+      "Numerical Methods for Data Science",
+      "Capstone Project - I",
+    ],
+    // Semester III — Core (19 credits)
+    3: [
+      "Foundations of Cyber Security",
+      "Design of Algorithms",
+      "Machine Learning Techniques",
+      "Financial Economics",
+    ],
+    // Semester IV — Core (20 credits) + Summer Industry Project follows
+    4: [
+      "Database Management",
+      "Computer Organization",
+      "Cyber Security Essentials",
+      "Web Development and App Design",
+    ],
+    // Semester V — Core + Elective I (21 credits)
+    // Elective I options: Cloud Computing | Cybercrime and Digital Forensics
+    5: [
+      "Computer and Network Security",
+      "Operating Systems",
+      "Artificial Intelligence Techniques",
+      "Industrial and Organizational Psychology",
+      // Elective I choices:
+      "Cloud Computing",
+      "Cybercrime and Digital Forensics",
+    ],
+    // Semester VI — Core + Elective II + Elective III (19 credits)
+    // Elective II: Advanced Machine Learning Techniques | Image and Video Analytics | Web Application and Penetration Testing
+    // Elective III: Introduction to Blockchain and Cryptocurrency | Open Source and Threat Intelligence | Cyber Security with Blockchain | IoT Applications and Security
+    6: [
+      "Big Data Security",
+      "Capstone Project II",
+      // Elective II choices:
+      "Advanced Machine Learning Techniques",
+      "Image and Video Analytics",
+      "Web Application and Penetration Testing",
+      // Elective III choices:
+      "Introduction to Blockchain and Cryptocurrency",
+      "Open Source and Threat Intelligence",
+      "Cyber Security with Blockchain",
+      "IoT Applications and Security",
+    ],
+    // Semester VII — Core + Elective IV + Elective V (18 credits)
+    // Elective IV (9 options) + Elective V (9 options)
+    7: [
+      "Ethics and Technology",
+      "Project - I",
+      "Indian Knowledge System (IKS)",
+      // Elective IV choices:
+      "Cryptography",
+      "Time Series Analysis and Forecasting",
+      "Computer Vision",
+      "Blockchain Components and Architecture",
+      "Pattern Recognition",
+      "Principles of Programming Languages",
+      "Social Networks",
+      "Multimedia System",
+      "Nature Inspired Algorithms",
+      // Elective V choices:
+      "Data Visualization and Communication",
+      "Data Engineering and Pipeline Design",
+      "Reinforcement Learning",
+      "Data Virtualization and Dashboards",
+      "Graph Machine Learning",
+      "Bioinformatics",
+      "Computational Data Analysis",
+      "Blockchain Technology",
+      "Evolutionary Computing",
+    ],
+    // Semester VIII — Elective VI + VII + VIII + Project II (17 credits)
+    // Elective VI (6 options) + Elective VII (7 options) + Elective VIII (3 options)
+    8: [
+      "Project - II",
+      // Elective VI choices:
+      "Software Engineering and DevOps Practices",
+      "Information Security Principles",
+      "Game Theory",
+      "Smart Contracts and Solidity Programming",
+      "Multivariate Analysis",
+      "Statistical Machine Learning",
+      // Elective VII choices:
+      "Generative Artificial Intelligence",
+      "Large Language Model (LLM)",
+      "Mathematical Finance",
+      "Data Mining and Knowledge Discovery",
+      "Quantum Computing",
+      "Drone Data Processing",
+      "Edge Computing",
+      // Elective VIII choices:
+      "Text Mining",
+      "Big Data Analytics",
+      "Wireless Networks",
+    ],
+  },
+
+  // ════════════════════════════════════════════════════════════
+  // B.S Computer Science and Data Analytics (CSDA)
+  // Source: CSDA PDF — IIT Patna (4-Year B.S Programme)
+  // ════════════════════════════════════════════════════════════
+  bs_csda: {
+    // Semester I — Core (19 credits)
+    1: [
+      "Mathematics - I",
+      "Foundations of Computer Science",
+      "Foundations of Data Analytics",
+      "Foundations of English for Professionals",
+    ],
+    // Semester II — Core (20 credits)
+    2: [
+      "Mathematics - II",
+      "Programming and Data Structures with Python",
+      "Numerical Methods for Data Science",
+      "Capstone Project - I",
+    ],
+    // Semester III — Core (19 credits)
+    3: [
+      "Statistics for Data Science",
+      "Design of Algorithms",
+      "Machine Learning Techniques",
+      "Financial Economics",
+    ],
+    // Semester IV — Core (20 credits) + Summer Industry Project follows
+    4: [
+      "Database Management",
+      "Computer Organization",
+      "Advanced Machine Learning Techniques",
+      "Web Development and App Design",
+    ],
+    // Semester V — Core + Elective I (21 credits)
+    // Elective I options: Data Mining | Cloud Computing | High Performance Computing
+    5: [
+      "Computer and Network Security",
+      "Operating Systems",
+      "Artificial Intelligence Techniques",
+      "Industrial and Organizational Psychology",
+      // Elective I choices:
+      "Data Mining",
+      "Cloud Computing",
+      "High Performance Computing",
+    ],
+    // Semester VI — Core + Elective II + Elective III (19 credits)
+    // Elective II: Image and Video Analytics | Big Data Security | Introduction to Deep Learning
+    // Elective III: Social Network Analysis | Machine Learning and Security | Natural Language Processing
+    6: [
+      "Big Data Analytics",
+      "Capstone Project II",
+      // Elective II choices:
+      "Image and Video Analytics",
+      "Big Data Security",
+      "Introduction to Deep Learning",
+      // Elective III choices:
+      "Social Network Analysis",
+      "Machine Learning and Security",
+      "Natural Language Processing",
+    ],
+    // Semester VII — Core + Elective IV + Elective V (18 credits)
+    // Elective IV (8 options) + Elective V (8 options)
+    7: [
+      "Ethics and Technology",
+      "Project - I",
+      "Indian Knowledge System (IKS)",
+      // Elective IV choices:
+      "Statistical Modeling and Inference",
+      "Time Series Analysis and Forecasting",
+      "Computer Vision",
+      "Pattern Recognition",
+      "Principles of Programming Languages",
+      "Social Networks",
+      "Multimedia System",
+      "Program Analysis and Verification",
+      // Elective V choices:
+      "Data Visualization and Communication",
+      "Data Engineering and Pipeline Design",
+      "Reinforcement Learning",
+      "Graph Machine Learning",
+      "Bioinformatics",
+      "Computational Data Analysis",
+      "Blockchain Technology",
+      "Graph Theory",
+    ],
+    // Semester VIII — Elective VI + VII + VIII + Project II (17 credits)
+    // Elective VI (6 options) + Elective VII (8 options) + Elective VIII (3 options)
+    8: [
+      "Project - II",
+      // Elective VI choices:
+      "Software Engineering and DevOps Practices",
+      "Information Security Principles",
+      "Game Theory",
+      "Multivariate Analysis",
+      "Statistical Machine Learning",
+      "Combinatorial Optimization",
+      // Elective VII choices:
+      "Generative Artificial Intelligence",
+      "Large Language Model (LLM)",
+      "Mathematical Finance",
+      "Quantum Computing",
+      "Drone Data Processing",
+      "Edge Computing",
+      "Distributed Computing",
+      "Parallel Computing",
+      // Elective VIII choices:
+      "Text Mining",
+      "Cryptography",
+      "Wireless Networks",
+    ],
+  },
+
+  // ════════════════════════════════════════════════════════════
+  // Existing Degrees (unchanged)
+  // ════════════════════════════════════════════════════════════
   btech_cse: {
     1: ["Engineering Mathematics I","Physics","Engineering Chemistry","Programming in C","Engineering Graphics","Communication Skills"],
     2: ["Engineering Mathematics II","Basic Electronics","Data Structures","Object Oriented Programming","Digital Logic","Technical Writing"],
