@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AcadMetrics — Student Performance Analysis</title>
 
-  <!-- Google Fonts -->
+  <!-- GOOGLE FONTS -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-  <!-- Chart.js -->
+  <!-- CHART.JS -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
-  <!-- Stylesheet -->
+  <!-- STYLESHEET -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- ========================= LOADER ========================= -->
+  <!-- ======================= LOADER ========================= -->
   <div class="loader-overlay" id="loaderOverlay">
     <div class="loader-content">
       <div class="loader-ring"></div>
@@ -26,7 +26,7 @@
     </div>
   </div>
 
-  <!-- ========================= HEADER ========================= -->
+  <!-- ====================== HEADER ========================= -->
   <header class="site-header">
     <div class="header-inner">
       <div class="brand">
@@ -48,11 +48,11 @@
         </button>
       </nav>
       <div class="header-actions">
-        <!-- Theme Toggle -->
+        <!-- THEME TOGGLE-->
         <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
           <span class="theme-icon" id="themeIcon">☀</span>
         </button>
-        <!-- Help Button -->
+        <!--HELP BUTTON-->
         <button class="help-btn" onclick="toggleHelp()" title="Help & Guide">
           <span>?</span>
         </button>
@@ -60,7 +60,7 @@
     </div>
   </header>
 
-  <!-- ========================= HELP PANEL ========================= -->
+  <!-- ========================HELP PANEL========================= -->
   <div class="help-overlay" id="helpOverlay" onclick="toggleHelp()"></div>
   <aside class="help-panel" id="helpPanel">
     <div class="help-header">
@@ -121,26 +121,26 @@
     </div>
   </aside>
 
-  <!-- ========================= MAIN ========================= -->
+  <!-- =========================MAIN========================= -->
   <main class="main-content">
 
-    <!-- ===== TAB: INPUT ===== -->
+    <!-- =====TAB:INPUT ===== -->
     <section class="tab-section" id="tab-input">
 
-      <!-- Student Tabs Bar -->
+      <!--STUDENT TAB BAR-->
       <div class="student-tabs-bar">
         <div class="student-tabs-scroll" id="studentTabsScroll">
-          <!-- Tabs injected by JS -->
+          <!--TABS INJECTED BY JS-->
         </div>
         <button class="add-student-btn" onclick="addStudent()" title="Add New Student">
           <span>+</span> Add Student
         </button>
       </div>
 
-      <!-- Input Form Card -->
+      <!--INPUT FORM CARD-->
       <div class="form-grid">
 
-        <!-- Left Column -->
+        <!--LEFT COLUMN : STUDENT PROFILE-->
         <div class="form-left">
           <div class="card">
             <div class="card-header">
@@ -225,7 +225,7 @@
           </div>
         </div>
 
-        <!-- Right Column: Subject Fields -->
+        <!-- RIGHT COLUMN : SUBJECT FIELDS -->
         <div class="form-right">
           <div class="card" id="subjectsCard">
             <div class="card-header">
@@ -240,7 +240,7 @@
               </div>
             </div>
 
-            <!-- CGPA Preview -->
+            <!-- CGPA PREVIEW-->
             <div class="cgpa-preview" id="cgpaPreview" style="display:none">
               <div class="cgpa-label">Calculated CGPA</div>
               <div class="cgpa-value" id="cgpaValue">—</div>
@@ -252,7 +252,7 @@
 
           </div>
 
-          <!-- Action Buttons -->
+          <!--ACTION BUTTONS-->
           <div class="action-row">
             <button class="btn-outline" onclick="clearCurrentStudent()">
               <span>↺</span> Clear
@@ -269,7 +269,7 @@
       </div>
     </section>
 
-    <!-- ===== TAB: DASHBOARD ===== -->
+    <!-- =====TAB : DASHBOARD===== -->
     <section class="tab-section hidden" id="tab-dashboard">
       <div class="dashboard-header">
         <div>
@@ -279,12 +279,12 @@
         <button class="btn-outline" onclick="switchTab('input')">← Back to Input</button>
       </div>
 
-      <!-- Summary Cards -->
+      <!--SUMMARY CARDS-->
       <div class="summary-grid" id="summaryGrid">
         <!-- Injected by JS -->
       </div>
 
-      <!-- Charts Grid -->
+      <!--CHARTS GRID-->
       <div class="charts-grid">
         <div class="card chart-card span-2">
           <div class="card-header">
@@ -315,19 +315,19 @@
         </div>
       </div>
 
-      <!-- Insights Section -->
+      <!--INSIGHT SECTION-->
       <div class="card insights-card" id="insightsCard">
         <div class="card-header">
           <h3 class="card-title">Performance Insights</h3>
           <span class="card-badge">AI Summary</span>
         </div>
         <div class="insights-grid" id="insightsGrid">
-          <!-- Injected by JS -->
+          <!--INJECTED BY JS-->
         </div>
       </div>
     </section>
 
-    <!-- ===== TAB: COMPARE ===== -->
+    <!-- =====TAB : COMPARE===== -->
     <section class="tab-section hidden" id="tab-compare">
       <div class="dashboard-header">
         <div>
@@ -342,7 +342,7 @@
         Add at least 2 students with data to enable comparison.
       </div>
 
-      <!-- Comparison Table -->
+      <!--COMPARISON TABLE-->
       <div class="card" id="compareTableCard">
         <div class="card-header">
           <h3 class="card-title">CGPA Comparison Table</h3>
@@ -361,13 +361,13 @@
               </tr>
             </thead>
             <tbody id="compareTableBody">
-              <!-- Injected by JS -->
+              <!--INJECTED BY JS-->
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- Comparison Charts -->
+      <!--COMPARISON CHARTS-->
       <div class="charts-grid">
         <div class="card chart-card span-2">
           <div class="card-header">
@@ -391,7 +391,7 @@
 
   </main>
 
-  <!-- ========================= FOOTER ========================= -->
+  <!-- =========================FOOTER========================= -->
   <footer class="site-footer">
     <div class="footer-inner">
       <span>AcadMetrics · Capstone Project — Comparative Students Performance Analysis</span>
@@ -400,7 +400,7 @@
     </div>
   </footer>
 
-  <!-- Script -->
+  <!--SCRIPT-->
   <script src="script.js"></script>
 </body>
 </html>
